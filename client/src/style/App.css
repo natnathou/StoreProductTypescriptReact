@@ -1,0 +1,10 @@
+.App {
+	padding-top: 50px !important;
+}
+
+.buttonHeadApp {
+	width: 100%;
+	margin-bottom: 15px !important;
+	display: flex;
+	justify-content: space-between;
+}
