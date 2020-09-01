@@ -1,4 +1,4 @@
-import React, { useEffect, MouseEvent } from 'react';
+import React, { useEffect, useState, MouseEvent } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { StoreState } from '../reducers/index';
@@ -12,6 +12,7 @@ import {
 } from '../actions';
 import { ProductsListState } from '../reducers/productsListReducers';
 import { ProductsCollection } from '../tools/ProductsCollection';
+import { ArrayDiviser } from '../tools/ArrayDiviser';
 import '../style/ProductsList.css';
 
 interface AppProps {
@@ -23,6 +24,10 @@ interface AppProps {
 	displayForm: typeof displayForm;
 }
 
+const productsPerPage = 4;
+const numberOfPage = 4;
+let arrayPagination: JSX.Element[] = [];
+
 const _ProductsList = ({
 	products,
 	sorterStatus,
@@ -31,9 +36,26 @@ const _ProductsList = ({
 	updateForm,
 	displayForm
 }: AppProps): JSX.Element => {
+	const [step, setStep] = useState(0);
+
 	useEffect(() => {
 		fetchDb();
 	}, [fetchDb]);
+
+	useEffect(() => {
+		arrayPagination = [];
+		for (let i = 0; i < numberOfPage; i++) {
+			arrayPagination.push(
+				<div
+					className={`item ${step === i ? `active` : ``}`}
+					key={i}
+					onClick={() => setStep(i)}
+				>
+					{i + 1}
+				</div>
+			);
+		}
+	}, [step]);
 
 	const handleClickModify = (event: MouseEvent<HTMLDivElement>): void => {
 		let id = event.currentTarget.id;
@@ -66,7 +88,11 @@ const _ProductsList = ({
 				break;
 		}
 
-		return productsToRender.map((data, index) => {
+		let renderListPerPage = ArrayDiviser.organise(
+			productsToRender,
+			productsPerPage
+		);
+		return renderListPerPage[step].map((data, index) => {
 			return (
 				<div className='item' key={index}>
 					<img
@@ -117,7 +143,20 @@ const _ProductsList = ({
 		});
 	};
 
-	return <div className='ui middle aligned divided list'>{renderList()}</div>;
+	const pagination = () => {
+		return arrayPagination.map((data) => {
+			return data;
+		});
+	};
+
+	return (
+		<div className='ui middle aligned divided list'>
+			{renderList()}
+			<div className='ui center aligned container'>
+				<div className='ui pagination menu'>{pagination()}</div>
+			</div>
+		</div>
+	);
 };
 
 const mapStateToProps = ({

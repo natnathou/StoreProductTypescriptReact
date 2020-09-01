@@ -47,11 +47,20 @@ const _Form = ({
 	};
 
 	const handleSubmit = (e: FormEvent): void => {
-		if (form.title.split('').length < 6 || !form.picture || !form.price) {
+		setErrField({
+			status: false,
+			message: ''
+		});
+		if (
+			form.title.split('').length < 30 ||
+			!form.title ||
+			form.price === 0 ||
+			form.description.split('').length < 200
+		) {
 			setErrField({
 				status: true,
 				message:
-					"Title must have 30 word, Url, And Price can't be empty"
+					"Title needs 30 characters, Description needs 200 characters, Url, And Price can't be empty"
 			});
 		}
 		e.preventDefault();
