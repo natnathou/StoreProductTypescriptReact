@@ -15,12 +15,12 @@ interface AppProps {
 	sorter: Function;
 }
 
-export const _Dropdown = ({ sorterStatus, sorter }: AppProps) => {
+export const _Dropdown = ({ sorterStatus, sorter }: AppProps): JSX.Element => {
 	const [isDisplay, setIsDisplay] = useState(false);
 	const ref = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const onBodyClick = (event: MouseEvent) => {
+		const onBodyClick = (event: MouseEvent): void => {
 			if (ref.current) {
 				if (ref.current.contains(event.target as Node)) {
 					return;
@@ -39,7 +39,7 @@ export const _Dropdown = ({ sorterStatus, sorter }: AppProps) => {
 		setIsDisplay(!isDisplay);
 	};
 
-	const soterClick = (event: MouseEventReact<HTMLDivElement>) => {
+	const soterClick = (event: MouseEventReact<HTMLDivElement>): void => {
 		sorter(
 			event.currentTarget.getAttribute('data-value') as ProductProriety
 		);
@@ -47,7 +47,7 @@ export const _Dropdown = ({ sorterStatus, sorter }: AppProps) => {
 
 	const sorterPossibility = ['title', 'price'];
 
-	const sorterRender = () => {
+	const sorterRender = (): (JSX.Element | null)[] => {
 		return sorterPossibility.map((data, index) => {
 			if (data !== sorterStatus) {
 				return (

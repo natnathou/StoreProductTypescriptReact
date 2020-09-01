@@ -35,12 +35,13 @@ const _ProductsList = ({
 		fetchDb();
 	}, [fetchDb]);
 
-	const handleClickModify = (event: MouseEvent<HTMLDivElement>) => {
+	const handleClickModify = (event: MouseEvent<HTMLDivElement>): void => {
 		let id = event.currentTarget.id;
 		updateForm('title', products[id]['title']);
 		updateForm('description', products[id]['description']);
 		updateForm('picture', products[id]['picture']);
 		updateForm('price', products[id]['price']);
+		updateForm(new Date().toString(), products[id]['date']);
 		updateForm('id', products[id]['id']);
 		displayForm();
 	};

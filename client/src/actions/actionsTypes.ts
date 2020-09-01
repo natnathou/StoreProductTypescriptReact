@@ -6,18 +6,22 @@ import {
 	PostItem,
 	PatchItem,
 	DeleteItem,
-	Sorter
+	Sorter,
+	SearchProducts,
+	UpdateResults
 } from '../actions';
 
 export enum ActionTypes {
-	displayForm = 'DISPLAY_FORM',
-	updateForm = 'UPDATE_FORM',
-	resetForm = 'RESET_FORM',
-	fetchDb = 'FETCH_DB',
-	postItem = 'POST_ITEM',
-	patchItem = 'PATCH_ITEM',
-	deleteItem = 'DELETE_ITEM',
-	sorter = 'SORTER'
+	displayForm,
+	updateForm,
+	resetForm,
+	fetchDb,
+	postItem,
+	patchItem,
+	deleteItem,
+	sorter,
+	search,
+	updateResults
 }
 
 export type Action =
@@ -28,4 +32,6 @@ export type Action =
 	| PatchItem
 	| DeleteItem
 	| DisplayForm
-	| Sorter;
+	| Sorter
+	| SearchProducts
+	| UpdateResults;

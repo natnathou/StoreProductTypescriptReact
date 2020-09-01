@@ -6,12 +6,14 @@ export interface FormState {
 	picture: string;
 	description: string;
 	price: Price;
+	date: String;
 	id?: number;
 }
 const initialState: FormState = {
 	title: '',
 	picture: '',
 	description: '',
+	date: '',
 	price: ''
 };
 
