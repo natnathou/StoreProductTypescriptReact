@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import { ActionTypes } from '../actions';
 import { FormState } from '../reducers/formReducer';
+import { StoreState } from '../reducers';
 
 export interface Product {
 	title: string;
@@ -46,11 +47,15 @@ export const fetchDb = () => async (dispatch: Dispatch) => {
 	});
 };
 
-export const postItem = (formValue: Product) => async (dispatch: Dispatch) => {
+export const postItem = () => async (
+	dispatch: Dispatch,
+	getState: () => StoreState
+) => {
 	let response: AxiosResponse<Product>;
-
 	try {
-		response = await axios.post<Product>('/products', { ...formValue });
+		response = await axios.post<Product>('/products', {
+			...getState().form
+		});
 	} catch (e) {
 		response = e;
 	}

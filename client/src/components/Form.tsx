@@ -59,7 +59,8 @@ const _Form = ({
 			if (form.id) {
 				patchItem(form.id, form);
 			} else {
-				postItem(form);
+				updateForm('date', new Date().toString());
+				postItem();
 			}
 		}
 	};

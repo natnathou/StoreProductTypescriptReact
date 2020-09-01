@@ -45,7 +45,7 @@ export const _Dropdown = ({ sorterStatus, sorter }: AppProps): JSX.Element => {
 		);
 	};
 
-	const sorterPossibility = ['title', 'price'];
+	const sorterPossibility = ['title', 'price', 'date'];
 
 	const sorterRender = (): (JSX.Element | null)[] => {
 		return sorterPossibility.map((data, index) => {

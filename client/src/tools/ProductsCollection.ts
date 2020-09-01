@@ -6,7 +6,8 @@ export type ProductProriety =
 	| 'picture'
 	| 'description'
 	| 'price'
-	| 'id';
+	| 'id'
+	| 'date';
 
 export class ProductsCollection extends SorterCollection {
 	static create(data: Product[]): ProductsCollection {
@@ -20,6 +21,13 @@ export class ProductsCollection extends SorterCollection {
 	compare(index: number, propriety: ProductProriety): boolean {
 		if (propriety === 'price' || propriety === 'id') {
 			if (this.data[index + 1][propriety] < this.data[index][propriety]) {
+				return true;
+			}
+		} else if (propriety === 'date') {
+			if (
+				new Date(this.data[index + 1][propriety]) <
+				new Date(this.data[index][propriety])
+			) {
 				return true;
 			}
 		} else {

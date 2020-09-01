@@ -58,6 +58,10 @@ const _ProductsList = ({
 				arrayProducts.sort('price');
 				productsToRender = arrayProducts.data;
 				break;
+			case 'date':
+				arrayProducts.sort('date');
+				productsToRender = arrayProducts.data;
+				break;
 			default:
 				break;
 		}

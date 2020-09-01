@@ -8,8 +8,6 @@ export const formIsDisplayReducer = (
 	state: stateIsDisplay = { status: false },
 	action: Action
 ) => {
-	console.log('new status');
-
 	switch (action.type) {
 		case ActionTypes.displayForm:
 			return { ...state, status: true };
